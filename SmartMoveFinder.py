@@ -144,7 +144,7 @@ piecePositionScores = {"wN": whiteKnightScores,"bN": blackKnightScores,
                        "wK": whiteKingScore, "bK": blackKingScore,
                        }
 
-CHECKMATE = 1000
+CHECKMATE = 10000
 STALEMATE = 0
 DEPTH = 3
 
@@ -198,15 +198,15 @@ def findBestMoveMinMax(gs, validMoves, level):
     nextMove = None
     counter = 0
     random.shuffle(validMoves)
-    # findMoveMinMax(gs,validMoves, DEPTH, gs.whiteToMove)
-    # findMoveMinMaxAlphaBeta(gs,validMoves, level, -CHECKMATE, CHECKMATE, gs.whiteToMove, level)
+    # findMoveMinMax(gs,validMoves, level, gs.whiteToMove, level)
+    findMoveMinMaxAlphaBeta(gs,validMoves, level, -CHECKMATE, CHECKMATE, gs.whiteToMove, level)
     # findMoveNegaMax(gs,validMoves, DEPTH, 1 if gs.whiteToMove else -1)
-    findMoveNegaMaxAlphaBeta(gs,validMoves, level, -CHECKMATE, CHECKMATE, 1 if gs.whiteToMove else -1,level)
+    # findMoveNegaMaxAlphaBeta(gs,validMoves, level, -CHECKMATE, CHECKMATE, 1 if gs.whiteToMove else -1,level)
     print("Game State Counter: ",counter)
     
     return nextMove
 
-def findMoveMinMax(gs, validMoves, depth, whiteToMove):
+def findMoveMinMax(gs, validMoves, depth, whiteToMove, maxLevel):
     global nextMove,counter
     counter += 1
     if depth == 0:
@@ -217,10 +217,10 @@ def findMoveMinMax(gs, validMoves, depth, whiteToMove):
         for move in validMoves:
             gs.makeMove(move)
             nextMoves = gs.getValidMoves()
-            score = findMoveMinMax(gs, nextMoves, depth-1, False)
+            score = findMoveMinMax(gs, nextMoves, depth-1, False,maxLevel)
             if score > maxScore:
                 maxScore = score
-                if depth == DEPTH:
+                if depth == maxLevel:
                     nextMove = move
             gs.undoMove()
         return maxScore
@@ -229,11 +229,11 @@ def findMoveMinMax(gs, validMoves, depth, whiteToMove):
         for move in validMoves:
             gs.makeMove(move)
             nextMoves = gs.getValidMoves()
-            score = findMoveMinMax(gs, nextMoves, depth-1, True)
+            score = findMoveMinMax(gs, nextMoves, depth-1, True,maxLevel)
 
             if score < minSCore:
                 minSCore = score
-                if depth == DEPTH:
+                if depth == maxLevel:
                     nextMove = move
             gs.undoMove()
         return minSCore
