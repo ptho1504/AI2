@@ -1,81 +1,162 @@
 import random
 
-pieceScore = {"K": 0, "Q": 10, "R": 5, "B":3, "N":3, "p":1}
+pieceScore = {"K": 900, "Q": 90, "R": 50, "B":30, "N":30, "p":10}
 
-knightScores = [
-                [1, 1, 1, 1, 1, 1, 1, 1],
-                [1, 2, 2, 2, 2, 2, 2, 1],
-                [1, 2, 3, 3, 3, 3, 2, 1],
-                [1, 2, 3, 4, 4, 3, 2, 1],
-                [1, 2, 3, 4, 4, 3, 2, 1],
-                [1, 2, 3, 3, 3, 3, 2, 1],
-                [1, 2, 2, 2, 2, 2, 2, 1],
-                [1, 1, 1, 1, 1, 1, 1, 1]]
+whiteKnightScores = [
+                    [-5.0, -4.0, -3.0, -3.0, -3.0, -3.0, -4.0, -5.0],
+                    [-4.0, -2.0,  0.0,  0.0,  0.0,  0.0, -2.0, -4.0],
+                    [-3.0,  0.0,  1.0,  1.5,  1.5,  1.0,  0.0, -3.0],
+                    [-3.0,  0.5,  1.5,  2.0,  2.0,  1.5,  0.5, -3.0],
+                    [-3.0,  0.0,  1.5,  2.0,  2.0,  1.5,  0.0, -3.0],
+                    [-3.0,  0.5,  1.0,  1.5,  1.5,  1.0,  0.5, -3.0],
+                    [-4.0, -2.0,  0.0,  0.5,  0.5,  0.0, -2.0, -4.0],
+                    [-5.0, -4.0, -3.0, -3.0, -3.0, -3.0, -4.0, -5.0],
+                ]  
+        
+blackKnightScores = [
+                    [-5.0, -4.0, -3.0, -3.0, -3.0, -3.0, -4.0, -5.0],
+                    [-4.0, -2.0,  0.0,  0.5,  0.5,  0.0, -2.0, -4.0],
+                    [-3.0,  0.5,  1.0,  1.5,  1.5,  1.0,  0.5, -3.0],
+                    [-3.0,  0.0,  1.5,  2.0,  2.0,  1.5,  0.0, -3.0],
+                    [-3.0,  0.5,  1.5,  2.0,  2.0,  1.5,  0.5, -3.0],
+                    [-3.0,  0.0,  1.0,  1.5,  1.5,  1.0,  0.0, -3.0],
+                    [-4.0, -2.0,  0.0,  0.0,  0.0,  0.0, -2.0, -4.0],
+                    [-5.0, -4.0, -3.0, -3.0, -3.0, -3.0, -4.0, -5.0],
+                ]
 
-bishopScores=[
-                [4, 3, 2, 1, 1, 2, 3, 4],
-                [3, 4, 3, 2, 2, 3, 4, 3],
-                [2, 3, 4, 3, 3, 4, 3, 2],
-                [1, 2, 3, 4, 4, 3, 2, 1],
-                [1, 2, 3, 4, 4, 3, 2, 1],
-                [2, 3, 4, 3, 3, 4, 3, 2],
-                [3, 4, 3, 2, 2, 3, 4, 3],
-                [4, 3, 2, 1, 1, 2, 3, 4]]
 
-queenScores=[   
-                [1, 1, 1, 3, 1, 1, 1, 1],
-                [1, 2, 3, 3, 3, 1, 1, 1],
-                [1, 4, 3, 3, 3, 4, 2, 1],
-                [1, 2, 3, 3, 3, 2, 2, 1],
-                [1, 2, 3, 3, 3, 2, 2, 1],
-                [1, 4, 3, 3, 3, 4, 2, 1],
-                [1, 1, 2, 3, 3, 1, 1, 1],
-                [1, 1, 1, 3, 1, 1, 1, 1]]
+whiteBishopScores=[
+                    [-2.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -2.0],
+                    [-1.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0, -1.0],
+                    [-1.0,  0.0,  0.5,  1.0,  1.0,  0.5,  0.0, -1.0],
+                    [-1.0,  0.5,  0.5,  1.0,  1.0,  0.5,  0.5, -1.0],
+                    [-1.0,  0.0,  1.0,  1.0,  1.0,  1.0,  0.0, -1.0],
+                    [-1.0,  1.0,  1.0,  1.0,  1.0,  1.0,  1.0, -1.0],
+                    [-1.0,  0.5,  0.0,  0.0,  0.0,  0.0,  0.5, -1.0],
+                    [-2.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -2.0],
+             ]
 
-rookScores=[
-                [4, 3, 4, 4, 4, 4, 3, 4],
-                [4, 4, 4, 4, 4, 4, 4, 4],
-                [1, 1, 2, 3, 3, 2, 1, 1],
-                [1, 2, 3, 4, 4, 3, 2, 1],
-                [1, 2, 3, 4, 4, 3, 2, 1],
-                [1, 1, 2, 2, 2, 2, 1, 1],
-                [4, 4, 4, 4, 4, 4, 4, 4],
-                [4, 3, 4, 4, 4, 4, 3, 4]]
+blackBishopScores=[
+                    [-2.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -2.0],
+                    [-1.0,  0.5,  0.0,  0.0,  0.0,  0.0,  0.5, -1.0],
+                    [-1.0,  1.0,  1.0,  1.0,  1.0,  1.0,  1.0, -1.0],
+                    [-1.0,  0.0,  1.0,  1.0,  1.0,  1.0,  0.0, -1.0],
+                    [-1.0,  0.5,  0.5,  1.0,  1.0,  0.5,  0.5, -1.0],
+                    [-1.0,  0.0,  0.5,  1.0,  1.0,  0.5,  0.0, -1.0],
+                    [-1.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0, -1.0],
+                    [-2.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -2.0],
+             ]  
 
-whitePawnScores =[
-                [8, 8, 8, 8, 8, 8, 8, 8],
-                [8, 8, 8, 8, 8, 8, 8, 8],
-                [5, 6, 6, 7, 7, 6, 6, 5],
-                [2, 3, 3, 5, 5, 3, 3, 2],
-                [1, 2, 3, 4, 4, 3, 2, 1],
-                [1, 1, 2, 3, 3, 2, 1, 1],
-                [1, 1, 1, 0, 0, 1, 1, 1],
-                [0, 0, 0, 0, 0, 0, 0, 0]]
+whiteQueenScores=[
+                    [-2.0, -1.0, -1.0, -0.5, -0.5, -1.0, -1.0, -2.0],
+                    [-1.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0, -1.0],
+                    [-1.0,  0.0,  0.5,  0.5,  0.5,  0.5,  0.0, -1.0],
+                    [-0.5,  0.0,  0.5,  0.5,  0.5,  0.5,  0.0, -0.5],
+                    [ 0.0,  0.0,  0.5,  0.5,  0.5,  0.5,  0.0, -0.5],
+                    [-1.0,  0.5,  0.5,  0.5,  0.5,  0.5,  0.0, -1.0],
+                    [-1.0,  0.0,  0.5,  0.0,  0.0,  0.0,  0.0, -1.0],
+                    [-2.0, -1.0, -1.0, -0.5, -0.5, -1.0, -1.0, -2.0],
+            ]
+
+blackQueenScores=[
+                    [-2.0, -1.0, -1.0, -0.5, -0.5, -1.0, -1.0, -2.0],
+                    [-1.0,  0.0,  0.0,  0.0,  0.0,  0.5,  0.0, -1.0],
+                    [-1.0,  0.0,  0.5,  0.5,  0.5,  0.5,  0.5, -1.0],
+                    [-0.5,  0.0,  0.5,  0.5,  0.5,  0.5,  0.0,  0.0],
+                    [-0.5,  0.0,  0.5,  0.5,  0.5,  0.5,  0.0, -0.5],
+                    [-1.0,  0.0,  0.5,  0.5,  0.5,  0.5,  0.0, -1.0],
+                    [-1.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0, -1.0],
+                    [-2.0, -1.0, -1.0, -0.5, -0.5, -1.0, -1.0, -2.0],
+            ]
+
+whiteRookScores=[
+                    [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,  0.0],
+                    [ 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,  0.5],
+                    [-0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.5],
+                    [-0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.5],
+                    [-0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.5],
+                    [-0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.5],
+                    [-0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.5],
+                    [ 0.0, 0.0, 0.0, 0.5, 0.5, 0.0, 0.0,  0.0],
+            ]
+
+blackRookScores=[
+                    [ 0.0, 0.0, 0.0, 0.5, 0.5, 0.0, 0.0,  0.0],
+                    [-0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.5],
+                    [-0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.5],
+                    [-0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.5],
+                    [-0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.5],
+                    [-0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.5],
+                    [ 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,  0.5],
+                    [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,  0.0],
+            ]
+
+whitePawnScores=[
+                    [0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0],
+                    [5.0,  5.0,  5.0,  5.0,  5.0,  5.0,  5.0,  5.0],
+                    [1.0,  1.0,  2.0,  3.0,  3.0,  2.0,  1.0,  1.0],
+                    [0.5,  0.5,  1.0,  2.5,  2.5,  1.0,  0.5,  0.5],
+                    [0.0,  0.0,  0.0,  2.0,  2.0,  0.0,  0.0,  0.0],
+                    [0.5, -0.5, -1.0,  0.0,  0.0, -1.0, -0.5,  0.5],
+                    [0.5,  1.0,  1.0, -2.0, -2.0,  1.0,  1.0,  0.5],
+                    [0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0],
+                ]
 
 blackPawnScores =[
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [1, 1, 1, 0, 0, 1, 1, 1],
-                [1, 1, 2, 3, 3, 2, 1, 1],
-                [1, 2, 3, 4, 4, 3, 2, 1],
-                [2, 3, 3, 5, 5, 3, 3, 2],
-                [5, 6, 6, 7, 7, 6, 6, 5],
-                [8, 8, 8, 8, 8, 8, 8, 8],
-                [8, 8, 8, 8, 8, 8, 8, 8]]
+                [0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0],
+                [0.5,  1.0,  1.0, -2.0, -2.0,  1.0,  1.0,  0.5],
+                [0.5, -0.5, -1.0,  0.0,  0.0, -1.0, -0.5,  0.5],
+                [0.0,  0.0,  0.0,  2.0,  2.0,  0.0,  0.0,  0.0],
+                [0.5,  0.5,  1.0,  2.5,  2.5,  1.0,  0.5,  0.5],
+                [1.0,  1.0,  2.0,  3.0,  3.0,  2.0,  1.0,  1.0],
+                [5.0,  5.0,  5.0,  5.0,  5.0,  5.0,  5.0,  5.0],
+                [0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0],
+            ]
+
+whiteKingScore = [
+                [-3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
+                [-3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
+                [-3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
+                [-3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
+                [-2.0, -3.0, -3.0, -4.0, -4.0, -3.0, -3.0, -2.0],
+                [-1.0, -2.0, -2.0, -2.0, -2.0, -2.0, -2.0, -1.0],
+                [ 2.0,  2.0,  0.0,  0.0,  0.0,  0.0,  2.0,  2.0],
+                [ 2.0,  3.0,  1.0,  0.0,  0.0,  1.0,  3.0,  2.0]
+]
+
+blackKingScore = [
+                [ 2.0,  3.0,  1.0,  0.0,  0.0,  1.0,  3.0,  2.0],
+                [ 2.0,  2.0,  0.0,  0.0,  0.0,  0.0,  2.0,  2.0],
+                [-1.0, -2.0, -2.0, -2.0, -2.0, -2.0, -2.0, -1.0],
+                [-2.0, -3.0, -3.0, -4.0, -4.0, -3.0, -3.0, -2.0],
+                [-3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
+                [-3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
+                [-3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
+                [-3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
+]
 
 
-
-
-piecePositionScores = {"N": knightScores, "Q": queenScores, "B": bishopScores, "R": rookScores, "bp":blackPawnScores,
-                        "wp": whitePawnScores
+piecePositionScores = {"wN": whiteKnightScores,"bN": blackKnightScores, 
+                       "wQ": whiteQueenScores, "bQ" : blackQueenScores, 
+                       "wB": whiteBishopScores, "bB": blackBishopScores, 
+                       "wR": whiteRookScores, "bR": blackRookScores,
+                       "bp":blackPawnScores, "wp": whitePawnScores,
+                       "wK": whiteKingScore, "bK": blackKingScore,
                        }
 
 CHECKMATE = 1000
 STALEMATE = 0
-DEPTH = 2
+DEPTH = 3
 
 def findRandomMove(validMoves):
     return validMoves[random.randint(0,len(validMoves)-1)]
 
+def findLevel(gs, validMoves, level):
+    if level == 1:
+        return findRandomMove(validMoves)
+    else:
+        return findBestMoveMinMax(gs, validMoves, level)
+        
 def findBestMove(gs, validMoves):
      turnMultiplier = 1 if gs.whiteToMove else -1
      opponentMinMaxScore = CHECKMATE 
@@ -110,15 +191,17 @@ def findBestMove(gs, validMoves):
      return bestPlayerMove
 
 
-def findBestMoveMinMax(gs, validMoves):
+    
+
+def findBestMoveMinMax(gs, validMoves, level):
     global nextMove, counter
     nextMove = None
     counter = 0
     random.shuffle(validMoves)
     # findMoveMinMax(gs,validMoves, DEPTH, gs.whiteToMove)
-    # findMoveMinMaxAlphaBeta(gs,validMoves, DEPTH, -CHECKMATE, CHECKMATE, 1 if gs.whiteToMove else -1)
+    # findMoveMinMaxAlphaBeta(gs,validMoves, level, -CHECKMATE, CHECKMATE, gs.whiteToMove, level)
     # findMoveNegaMax(gs,validMoves, DEPTH, 1 if gs.whiteToMove else -1)
-    findMoveNegaMaxAlphaBeta(gs,validMoves, DEPTH, -CHECKMATE, CHECKMATE, 1 if gs.whiteToMove else -1)
+    findMoveNegaMaxAlphaBeta(gs,validMoves, level, -CHECKMATE, CHECKMATE, 1 if gs.whiteToMove else -1,level)
     print("Game State Counter: ",counter)
     
     return nextMove
@@ -155,7 +238,7 @@ def findMoveMinMax(gs, validMoves, depth, whiteToMove):
             gs.undoMove()
         return minSCore
 
-def findMoveMinMaxAlphaBeta(gs,validMoves, depth, alpha, beta, whiteToMove):
+def findMoveMinMaxAlphaBeta(gs,validMoves, depth, alpha, beta, whiteToMove, maxDepth):
     global nextMove,counter
     counter += 1
     if depth == 0:
@@ -166,33 +249,35 @@ def findMoveMinMaxAlphaBeta(gs,validMoves, depth, alpha, beta, whiteToMove):
         for move in validMoves:
             gs.makeMove(move)
             nextMoves = gs.getValidMoves()
-            score = findMoveMinMaxAlphaBeta(gs, nextMoves, depth-1,alpha,beta, False)
+            score = findMoveMinMaxAlphaBeta(gs, nextMoves, depth-1,alpha,beta, False,maxDepth)
             if score > maxScore:
                 maxScore = score
-                if depth == DEPTH:
+                if depth == maxDepth:
                     nextMove = move
             gs.undoMove()
             if maxScore > alpha:
                 alpha = maxScore
             if beta <= alpha:
                 break
+        # print(nextMove, score)
         return maxScore
     else:
         minSCore = CHECKMATE
         for move in validMoves:
             gs.makeMove(move)
             nextMoves = gs.getValidMoves()
-            score = findMoveMinMaxAlphaBeta(gs, nextMoves, depth-1,alpha,beta, True)
+            score = findMoveMinMaxAlphaBeta(gs, nextMoves, depth-1,alpha,beta, True,maxDepth)
 
             if score < minSCore:
                 minSCore = score
-                if depth == DEPTH:
+                if depth == maxDepth:
                     nextMove = move
             gs.undoMove()
             if minSCore < beta:
                 beta = minSCore
             if beta <= alpha:
                 break
+        # print(nextMove, score)
         return minSCore
 
 def findMoveNegaMax(gs, validMoves, depth, turnMultiplier):
@@ -213,7 +298,7 @@ def findMoveNegaMax(gs, validMoves, depth, turnMultiplier):
         gs.undoMove()
     return maxScore
 
-def findMoveNegaMaxAlphaBeta(gs, validMoves, depth, alpha, beta, turnMultiplier):
+def findMoveNegaMaxAlphaBeta(gs, validMoves, depth, alpha, beta, turnMultiplier, maxLevel):
     global nextMove,counter
     counter += 1
     if depth == 0:
@@ -223,16 +308,17 @@ def findMoveNegaMaxAlphaBeta(gs, validMoves, depth, alpha, beta, turnMultiplier)
     for move in validMoves:
         gs.makeMove(move)
         nextMoves = gs.getValidMoves()
-        score = -findMoveNegaMaxAlphaBeta(gs,nextMoves,depth-1,-beta, -alpha, -turnMultiplier)
+        score = -findMoveNegaMaxAlphaBeta(gs,nextMoves,depth-1,-beta, -alpha, -turnMultiplier,maxLevel)
         if score > maxScore:
             maxScore = score
-            if depth == DEPTH:
+            if depth == maxLevel:
                 nextMove = move
         gs.undoMove()
         if maxScore > alpha: #prune happens
             alpha = maxScore
         if alpha >= beta:
             break
+    # print(nextMove, score)
     return maxScore
   
   
@@ -280,16 +366,16 @@ def scoreBoard(gs):
             if square != "--":
                 # Score it positionally
                 piecePositionScore = 0
-                if square[1] != "K":
-                    if square[1] == "p":
-                        piecePositionScore = piecePositionScores[square][row][col]
-                    else:
-                        piecePositionScore = piecePositionScores[square[1]][row][col]
+                # if square[1] != "K":
+                #     if square[1] == "p":
+                piecePositionScore = piecePositionScores[square][row][col]
+                    # else:
+                        # piecePositionScore = piecePositionScores[square[1]][row][col]
                 
                 if square[0] == 'w':
-                    score += pieceScore[square[1]] + piecePositionScore * .1
+                    score += pieceScore[square[1]] + piecePositionScore 
                 elif square[0] == 'b':
-                    score -= pieceScore[square[1]] + piecePositionScore * .1
+                    score -= pieceScore[square[1]] + piecePositionScore 
     return score
 
 def scoreMaterial(board):
