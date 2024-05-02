@@ -95,12 +95,21 @@ def main():
                     
         # AI move finder
         if not gameOver and not humanTurn:
-            AIMove = SmartMoveFinder.findBestMoveMinMax(gs, validMoves)
-            if AIMove is None:
-                AIMove = SmartMoveFinder.findRandomMove(validMoves)
-            gs.makeMove(AIMove)
-            moveMade = True
-            animate = True
+            if   gs.whiteToMove: # White use Level 1
+                AIMove = SmartMoveFinder.findLevel(gs,validMoves,3)
+                if AIMove is None:
+                    AIMove = SmartMoveFinder.findRandomMove(validMoves)
+                gs.makeMove(AIMove)
+                moveMade = True
+                animate = True
+            elif not   gs.whiteToMove: # Black use Level 2
+                AIMove = SmartMoveFinder.findLevel(gs, validMoves, 2)
+                # AIMove = SmartMoveFinder.findBestMoveMinMax(gs, validMoves, 2)
+                if AIMove is None:
+                    AIMove = SmartMoveFinder.findRandomMove(validMoves)
+                gs.makeMove(AIMove)
+                moveMade = True
+                animate = True
             
         if moveMade:
             if animate:
