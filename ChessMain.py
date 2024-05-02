@@ -35,8 +35,8 @@ def main():
     sqSelected = () # No sq is selected, keep track of the last click of the user
     playerClicks = [] # Keep track of player clicks ([(6,4)->(4,4)])
     gameOver = False
-    playerOne = False # A human is playing white, then this will true. If AI playing, then False
-    playerTwo = False # Same as above but for black
+    playerOne = True # A human is playing white, then this will true. If AI playing, then False
+    playerTwo = True # Same as above but for black
     
     while running:
         humanTurn = (gs.whiteToMove and playerOne) or (not gs.whiteToMove and playerTwo)
