@@ -2,7 +2,7 @@
 # Assigment 2 Chess AI
 Many many many thank to @Eddie Sharick
 
-#Guide
+# Guide
 Press "r" to reset <br />
 Press "z" to undo move (:< may be have some bug) <br />
 
